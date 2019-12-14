@@ -16,6 +16,10 @@ public class OrderServiceController {
 
 	@GetMapping("/orderProduct/{name}")
 	public String orderProduct(@PathVariable String name) {
+
+		if (name.equals("Bus")) {
+			throw new RuntimeException();
+		}
 		String port = environment.getProperty("server.port");
 		String welcomMsg = environment.getProperty("orderservice.welcome");
 		return welcomMsg + " The " + name + " has ordered and confirmed on the server port: " + port;

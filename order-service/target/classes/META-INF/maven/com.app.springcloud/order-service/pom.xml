@@ -12,9 +12,9 @@
 	</parent>
 
 	<groupId>com.app.springcloud</groupId>
-	<artifactId>search-service</artifactId>
+	<artifactId>order-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>search-service</name>
+	<name>order-service</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -58,16 +58,6 @@
 			<version>1.4.7.RELEASE</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-		</dependency> 
-		
-<!-- 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-hystrix</artifactId>
-		</dependency> -->
-
 
 	</dependencies>
 
@@ -101,4 +91,3 @@
 		</plugins>
 	</build>
 </project>
-	

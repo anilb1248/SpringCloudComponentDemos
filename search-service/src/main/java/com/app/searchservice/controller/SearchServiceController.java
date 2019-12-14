@@ -1,14 +1,18 @@
 package com.app.searchservice.controller;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import com.app.searchservice.service.SearchCircuit;
 
 //import org.springframework.cloud.client.discovery.DiscoveryClient;
 
@@ -32,6 +36,9 @@ public class SearchServiceController {
 	// @Autowired
 	// DiscoveryClient discoveryClient;
 
+	@Autowired
+	SearchCircuit searchCircuit;
+
 	@GetMapping("/getProducts")
 	public List<String> getProducts() {
 		List<String> list = new ArrayList<String>();
@@ -51,18 +58,20 @@ public class SearchServiceController {
 		// restTemplate.getForObject("http://localhost:2030/OrderService/orders/orderProduct/"
 		// + name, String.class);
 
-		/*
-		 * List<ServiceInstance> instances =
-		 * discoveryClient.getInstances("OrderService"); ServiceInstance instance =
-		 * instances.get(0); URI orderUri = instance.getUri();
-		 * System.out.println("*************** " + orderUri);
-		 * 
-		 * String response = new RestTemplate().getForObject(orderUri +
-		 * "/OrderService/orders/orderProduct/" + name, String.class);
-		 */
+		// List<ServiceInstance> instances =
+		// discoveryClient.getInstances("OrderService");
+		// ServiceInstance instance = instances.get(0);
+		// URI orderUri = instance.getUri();
+		// System.out.println("*************** " + orderUri);
+		//
+		// String response = new RestTemplate().getForObject(orderUri +
+		// "/OrderService/orders/orderProduct/" + name,
+		// String.class);
 
-		String response = restTemplate.getForObject("http://OrderService/OrderService/orders/orderProduct/" + name,
-				String.class);
+//		String response = restTemplate.getForObject("http://OrderService/OrderService/orders/orderProduct/" + name,
+//				String.class);
+
+		String response = searchCircuit.callOrderService(name);
 
 		return response;
 	}
